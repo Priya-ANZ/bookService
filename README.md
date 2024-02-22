@@ -41,9 +41,12 @@ express-async-errors has been used to centralize and catch all the application e
 
 For unexpected error and unhandled promise rejections which are not part of the request processesing pipeline, the process.on method in the index.js is used to log the error
  
+Protected API
+-------------------------------------------------
+The GET books API is a protected API and will only run for users who has isAdmin as true
+
 
 How to Setup DB
-
 -----------------------------------------------------
 
 Modify the below in .env file as per your DB connection parameters
@@ -88,7 +91,6 @@ knex migrate:down 20240220091440_users.js
 
 
 Endpoints Supported
-
 -------------------------------------------
 Register: 
 
