@@ -5,7 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "jest"
+    "test": "jest", 
+    "knex" : "npm i knex -g",
+    "knex-migrate-authors":"knex migrate:up 20240219170809_authors.js",
+     "knex-migrate-genres": "knex migrate:up 20240219170819_genres.js",
+     "knex-migrate-books": "knex migrate:up 20240219170739_books.js",
+     "knex-migrate-users": "knex migrate:up 20240220091440_users.js",
+     "knex-seed-authors":"knex seed:run --specific=authors.js",
+     "knex-seed-genres": "knex seed:run --specific=genres.js",
+     "knex-seed-books": "knex seed:run --specific=books.js"
   },
   "author": "",
   "license": "ISC",

@@ -41,3 +41,90 @@ express-async-errors has been used to centralize and catch all the application e
 
 For unexpected error and unhandled promise rejections which are not part of the request processesing pipeline, the process.on method in the index.js is used to log the error
  
+
+How to Setup DB
+
+-----------------------------------------------------
+
+Modify the below in .env file as per your DB connection parameters
+
+DB_HOST=127.0.0.1 
+DB_USER=root
+DB_PASSWORD=root
+DB_NAME=bookschema
+
+The DB can be setup using the below knex commands added in the package.json
+
+Step 1 : npm run knex
+
+Step 2 : Create tables using the below command. Please note the order
+	npm run knex-migrate-authors
+	npm run knex-migrate-genres
+	npm run knex-migrate-books
+	npm run knex-migrate-users
+
+Step 3: Add data to tables
+	npm run knex-seed-authors
+	npm run knex-seed-genres
+	npm run knex-seed-books
+
+To add data to the user table you need to run the register API since it requires password encryption. Use the below endpoint
+
+localhost:5000/register with raw Json body example
+{
+    "email": "testUser2@gmail.com",
+    "password":"test1234",
+     "isAdmin":true
+}
+
+If in any case, you need to delete the tables then below is the command to do so
+
+knex migrate:down <specific file name>
+knex migrate:down 20240219170739_books.js
+knex migrate:down 20240219170809_authors.js
+knex migrate:down 20240219170819_genres.js
+knex migrate:down 20240220091440_users.js
+
+
+
+Endpoints Supported
+
+-------------------------------------------
+Register: 
+
+localhost:5000/register 
+
+with request body as 
+
+{
+    "email": "testUser2@gmail.com",
+    "password":"test1234",
+     "isAdmin":true
+}
+
+Login:
+
+localhost:5000/login
+
+request body as 
+
+{
+    "email":"testUser1@gmail.com",
+    "password":"test12345"
+}
+
+Books:
+
+http://localhost:5000/book?title=th&author=er&pageSize=2&pageNo=1&publishedDateFrom=1980-01-01&publishedDateTo=2000-01-01&genre=romance
+
+The title and the author are mandatory fields
+Validation is done for following
+ 1. published date from and to format should be yyyy-mm-dd
+ 2. genre , pagesize, pageno, publishedDateFrom and publishedDateTo are optional
+ 3. PageSize and Pageno are numbers
+ 4. No other parameter is allowed
+
+
+
+
+
